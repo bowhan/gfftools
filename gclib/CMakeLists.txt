@@ -48,7 +48,7 @@ add_library(gclib_static
         ${GCLIB_SRC}
         )
 
-set_target_properties(gclib PROPERTIES OUTPUT_NAME "gclib")
+set_target_properties(gclib_static PROPERTIES OUTPUT_NAME "gclib")
 
 install(TARGETS gclib gclib_static
         ARCHIVE DESTINATION lib
