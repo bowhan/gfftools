@@ -35,7 +35,7 @@ int main(int argc, char **argv) {
                , pgff->strand
                , pgff->start - 1
                , pgff->end
-               , pgff->hasCDS() ? pgff->CDstart - 1 : pgff->start - 1
+               , pgff->hasCDS() ? pgff->CDstart - 1 : pgff->end
                , pgff->hasCDS() ? pgff->CDend : pgff->end
                , pgff->exons.Count()
         );
