@@ -18,6 +18,9 @@ target_link_libraries(gff2refFlat ${GCLIB})
 add_executable(mRNA_length mRNA_length.cpp)
 target_link_libraries(mRNA_length ${GCLIB})
 
+add_executable(extUtr extUtr.cpp)
+target_link_libraries(extUtr ${GCLIB} z)
+
 # install
-install(TARGETS gff2refFlat mRNA_length
+install(TARGETS gff2refFlat mRNA_length extUtr
         RUNTIME DESTINATION bin)
