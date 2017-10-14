@@ -27,3 +27,10 @@ _refFlat is mostly used by piccard to calculate RNA coverage_
 gff2refFlat hg19.genes.gtf > hg19.refFlat.txt
 ```
 
+`extUtr`: **extract 3' UTR sequence**<br>
+
+#### usage
+```bash
+extUtr mm10.genes.gtf mm10.genes.fa > mm10.3UTR.fa
+# mm10.genes.fa can be obtained using gffread, which can be found in Cufflink package
+```
