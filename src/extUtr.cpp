@@ -42,6 +42,7 @@ int main(int argc, char **argv) {
         if (!p_gffobj->hasCDS())
             continue;
         p_gffobj->mRNA_CDS_coords(cds_start, cds_end);
+        if (cds_end >= p_gffobj->covlen) continue;
         auto f = mrna2seq.find(string(p_gffobj->getID()));
         if (f != mrna2seq.end()) {
             fprintf(stdout, ">%s\n%s\n"
