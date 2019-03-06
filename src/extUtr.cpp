@@ -45,8 +45,9 @@ int main(int argc, char **argv) {
         if (cds_end >= p_gffobj->covlen) continue;
         auto f = mrna2seq.find(string(p_gffobj->getID()));
         if (f != mrna2seq.end()) {
-            fprintf(stdout, ">%s\n%s\n"
+            fprintf(stdout, ">%s %s\n%s\n"
                     , f->first.c_str()
+                    , p_gffobj->getGeneName()
                     , f->second.substr(cds_end).c_str());
         }
     }
