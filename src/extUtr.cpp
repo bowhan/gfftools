@@ -10,16 +10,25 @@ KSEQ_INIT(gzFile, gzread)
 
 using namespace std;
 
+#ifndef MIN_UTR_LEN
+#define MIN_UTR_LEN 1
+#endif
+
 int main(int argc, char **argv) {
     if (argc < 3) {
         fprintf(stderr
-                , "this script takes a gtf/gff file and print to stdout the fasta with 3' UTR\nusage:\n\t %s  gtf/gff transcriptom_fa\n"
-                , argv[0]);
+                , "this script takes a gtf/gff file and print to stdout the fasta with 3' UTR\n"
+                  "usage:\n\t %s  gtf/gff transcriptom_fa min_length[%d]\n"
+                , argv[0]
+                , MIN_UTR_LEN);
         exit(EXIT_FAILURE);
     }
     FILE *fh = fopen(argv[1], "r");
     gzFile fp = gzopen(argv[2], "r");
-
+    int min_len = 0;
+    if (argc > 3) {
+        min_len = stoi(argv[3]);
+    }
     if (!fh || !fp) {
         fprintf(stderr, "error: failed to open %s for reading\n", argv[1]);
         exit(EXIT_FAILURE);
@@ -42,7 +51,7 @@ int main(int argc, char **argv) {
         if (!p_gffobj->hasCDS())
             continue;
         p_gffobj->mRNA_CDS_coords(cds_start, cds_end);
-        if (cds_end >= p_gffobj->covlen) continue;
+        if (cds_end + min_len >= p_gffobj->covlen) continue;
         auto f = mrna2seq.find(string(p_gffobj->getID()));
         if (f != mrna2seq.end()) {
             fprintf(stdout, ">%s %s\n%s\n"
